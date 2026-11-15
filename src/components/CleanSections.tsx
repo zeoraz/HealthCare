@@ -7,12 +7,13 @@ import {
   FileText, 
   TrendingUp, 
   Building2, 
-  Smartphone, 
   CheckCircle2, 
   ArrowUpRight,
   Download
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
+import { InteractiveDiagnosticStudio } from './InteractiveDiagnosticStudio';
+import { RoiCalculator } from './RoiCalculator';
 
 interface CleanSectionsProps {
   onOpenBooking: () => void;
@@ -41,7 +42,8 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* 3 Architecture Pillar Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
           {/* Tech Card 1 */}
           <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all group">
             <div className="w-12 h-12 rounded-2xl bg-[#fdeee4] text-[#ea8d53] flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
@@ -84,6 +86,9 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
             </p>
           </div>
         </div>
+
+        {/* Live Interactive Product Diagnostic Studio */}
+        <InteractiveDiagnosticStudio />
       </section>
 
       {/* 2. Healthcare Section */}
@@ -182,7 +187,7 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
         </div>
       </section>
 
-      {/* 3. Solutions Section */}
+      {/* 3. Solutions Section with Interactive Practice ROI Calculator */}
       <section id="solutions" className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 py-20 border-t border-slate-200/80">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -196,7 +201,7 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900 mb-6">
@@ -257,6 +262,9 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
             </ul>
           </div>
         </div>
+
+        {/* Live ROI Calculator */}
+        <RoiCalculator onOpenBooking={onOpenBooking} />
       </section>
 
       {/* 4. Application Section */}
