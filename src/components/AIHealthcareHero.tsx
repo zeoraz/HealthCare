@@ -5,7 +5,10 @@ import {
   Download, 
   LayoutGrid, 
   X, 
-  Menu
+  Menu,
+  FlaskConical,
+  Play,
+  Sparkles
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
 
@@ -18,6 +21,10 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
   onOpenBooking 
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeBarHover, setActiveBarHover] = useState<number | null>(null);
+
+  // 10 bar heights for Card 1 widget
+  const barHeights = [45, 68, 55, 50, 80, 40, 42, 60, 52, 65];
 
   return (
     <div className="w-full bg-[#fcfbfa] text-slate-900 font-sans selection:bg-[#ea8d53]/20 selection:text-slate-950">
@@ -26,7 +33,7 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
       <header className="sticky top-0 z-40 w-full bg-[#fcfbfa]/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 h-20 flex items-center justify-between">
           
-          {/* Brand Logo matching reference */}
+          {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-8 h-8 rounded-full bg-slate-950 p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center">
               <div className="w-full h-full rounded-full bg-[#fcfbfa] flex items-center justify-center">
@@ -175,56 +182,109 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
 
         </div>
 
-        {/* 4-Card Hero Photos Section (Clean, permanent display without gallery expand modal) */}
+        {/* 4-Card Hero Photos Section (Curated Pinterest-Aesthetic Editorial Visuals) */}
         <div className="py-8 sm:py-10 border-b border-slate-200/80">
-          <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-5 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 items-stretch">
             
-            {/* Card 1: Clinical Practice (Lab Scientist with pristine frosted glass chart) */}
-            <div 
-              style={{ flex: '879 1 0%' }} 
-              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] h-[340px] sm:h-[400px] lg:h-[440px]"
-            >
+            {/* Card 1: Clinical Practice (Pinterest Lab Researcher with Crisp Frosted Glass Bar Chart) */}
+            <div className="lg:col-span-4 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] min-h-[360px] sm:min-h-[420px]">
               <img
-                src="/images/card1-clean-full.png"
-                alt="Clinical practice"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                src="/images/pinterest-card1-clinical.jpg"
+                alt="Clinical practice researcher"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+              />
+
+              {/* Frosted Glass Bar Chart Overlay Widget */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl p-4 text-white shadow-xl">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <FlaskConical className="w-4 h-4 text-white" />
+                    <span className="text-xs font-semibold tracking-tight text-white drop-shadow-sm">Clinical practice</span>
+                  </div>
+                  <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center hover:bg-white/40 cursor-pointer transition-colors">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+                  </div>
+                </div>
+
+                {/* 10 Bar Chart Bars with Axis Labels */}
+                <div className="flex items-end gap-2 h-16 pt-1">
+                  <div className="flex flex-col justify-between text-[9px] font-mono text-white/90 pr-1 h-full select-none font-bold">
+                    <span>500</span>
+                    <span>300</span>
+                    <span>100</span>
+                    <span>0</span>
+                  </div>
+
+                  <div className="flex-1 flex items-end justify-between gap-1 h-full">
+                    {barHeights.map((h, i) => (
+                      <div
+                        key={i}
+                        onMouseEnter={() => {
+                          setActiveBarHover(i);
+                          playBlip(600 + i * 35);
+                        }}
+                        onMouseLeave={() => setActiveBarHover(null)}
+                        style={{ height: `${h}%` }}
+                        className={`flex-1 rounded-md transition-all duration-300 cursor-pointer ${
+                          activeBarHover === i
+                            ? 'bg-white shadow-md scale-105'
+                            : i % 2 === 0
+                            ? 'bg-[#ea8d53]'
+                            : 'bg-[#fcdbc2]'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Biomechanical Spine (Pinterest Minimalist Ergonomic Spine Architecture) */}
+            <div className="lg:col-span-3 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] min-h-[360px] sm:min-h-[420px]">
+              <img
+                src="/images/pinterest-card2-biomechanics.jpg"
+                alt="Biomechanical spine architecture"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
               />
             </div>
 
-            {/* Card 2: Biomechanical Spine (Pristine holographic spine on chair) */}
-            <div 
-              style={{ flex: '473 1 0%' }} 
-              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] h-[340px] sm:h-[400px] lg:h-[440px]"
-            >
+            {/* Card 3: Serene Meditation & Neural Recovery (Pinterest Japandi Mindfulness) */}
+            <div className="lg:col-span-3 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ebdccc] min-h-[360px] sm:min-h-[420px]">
               <img
-                src="/images/card2-clean-full.png"
-                alt="Biomechanical spine"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-              />
-            </div>
-
-            {/* Card 3: Serene Meditation & Neural Recovery (Permanent Clean Photo) */}
-            <div
-              style={{ flex: '561 1 0%' }}
-              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ebdccc] h-[340px] sm:h-[400px] lg:h-[440px]"
-            >
-              <img
-                src="/images/card3-clean-full.png"
+                src="/images/pinterest-card3-mindfulness.jpg"
                 alt="Neural recovery and meditation"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
               />
+
+              {/* Circular Audio / Radar Indicators */}
+              <div className="absolute bottom-5 left-5 flex items-center gap-3">
+                <div className="relative w-8 h-8 rounded-full border-2 border-white/70 flex items-center justify-center shadow-sm">
+                  <div className="w-3.5 h-3.5 rounded-full bg-white animate-ping" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-[#ea8d53] shadow-md flex items-center justify-center text-white">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+              </div>
             </div>
 
-            {/* Card 4: Diagnostic Perception (Permanent Clean Photo) */}
-            <div
-              style={{ flex: '404 1 0%' }}
-              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] h-[340px] sm:h-[400px] lg:h-[440px]"
-            >
+            {/* Card 4: Diagnostic Perception (Pinterest Fluted Ribbed Glass Portrait) */}
+            <div className="lg:col-span-2 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] min-h-[360px] sm:min-h-[420px]">
               <img
-                src="/images/card4-clean-full.png"
+                src="/images/pinterest-card4-diagnostic.jpg"
                 alt="Facial and diagnostic perception"
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
               />
+
+              {/* Take a Look Pill Button */}
+              <div className="absolute bottom-5 left-4 right-4">
+                <button 
+                  onClick={() => playBlip(880)}
+                  className="w-full py-2 px-3 rounded-full bg-white/35 backdrop-blur-md border border-white/50 text-slate-900 text-[11px] font-medium flex items-center justify-center gap-1.5 shadow-md hover:bg-white/50 transition-colors"
+                >
+                  <Play className="w-3 h-3 fill-slate-900 stroke-none" />
+                  <span>Take a look</span>
+                </button>
+              </div>
             </div>
 
           </div>
