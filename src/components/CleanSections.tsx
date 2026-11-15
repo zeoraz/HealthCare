@@ -9,7 +9,8 @@ import {
   Building2, 
   CheckCircle2, 
   ArrowUpRight,
-  Download
+  Download,
+  Video
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
 import { InteractiveDiagnosticStudio } from './InteractiveDiagnosticStudio';
@@ -310,6 +311,16 @@ export const CleanSections: React.FC<CleanSectionsProps> = ({ onOpenBooking }) =
                 <span>Request Provider Access</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
+
+              <a
+                href="/videos/zeoraz-instagram-reel.mp4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#fdeee4] hover:bg-[#fadbc8] text-[#ea8d53] border border-[#ea8d53]/30 font-semibold text-xs tracking-wide transition-all shadow-sm"
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>Watch Reel (1080x1920 MP4)</span>
+              </a>
             </div>
           </div>
         </div>
