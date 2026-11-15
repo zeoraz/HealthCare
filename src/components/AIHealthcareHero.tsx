@@ -5,7 +5,6 @@ import {
   Download, 
   LayoutGrid, 
   X, 
-  Maximize2,
   Menu
 } from 'lucide-react';
 import { playBlip } from '../utils/audio';
@@ -18,14 +17,7 @@ interface AIHealthcareHeroProps {
 export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({ 
   onOpenBooking 
 }) => {
-  const [isCardExpanded, setIsCardExpanded] = useState(false);
-  const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleCard3Click = () => {
-    setIsCardExpanded(!isCardExpanded);
-    playBlip(isCardExpanded ? 700 : 900);
-  };
 
   return (
     <div className="w-full bg-[#fcfbfa] text-slate-900 font-sans selection:bg-[#ea8d53]/20 selection:text-slate-950">
@@ -183,103 +175,59 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
 
         </div>
 
-        {/* 4-Card Hero Gallery Section */}
-        <div className="py-8 sm:py-10 border-b border-slate-200/80 relative">
-          
-          {!isCardExpanded ? (
-            <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-5 w-full">
-              
-              {/* Card 1: Clinical Practice (Lab Scientist with pristine frosted glass chart) */}
-              <div 
-                style={{ flex: '879 1 0%' }} 
-                className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] h-[340px] sm:h-[400px] lg:h-[440px]"
-              >
-                <img
-                  src="/images/card1-clean-full.png"
-                  alt="Clinical practice"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                />
-              </div>
-
-              {/* Card 2: Biomechanical Spine (Pristine holographic spine on chair) */}
-              <div 
-                style={{ flex: '473 1 0%' }} 
-                className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] h-[340px] sm:h-[400px] lg:h-[440px]"
-              >
-                <img
-                  src="/images/card2-clean-full.png"
-                  alt="Biomechanical spine"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                />
-              </div>
-
-              {/* Card 3: Serene Meditation & Neural Recovery (Interactive: Click to Expand!) */}
-              <div
-                onClick={handleCard3Click}
-                style={{ flex: '561 1 0%' }}
-                className="rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-xl transition-all bg-[#ebdccc] h-[340px] sm:h-[400px] lg:h-[440px] border-2 border-transparent hover:border-[#ea8d53]/50"
-                title="Click to expand"
-              >
-                <img
-                  src="/images/card3-clean-full.png"
-                  alt="Neural recovery and meditation"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                />
-
-                {/* Subtle Hover Pill */}
-                <div className="absolute top-4 right-4 bg-slate-950/70 backdrop-blur-md text-white text-[10px] font-mono px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 shadow-md">
-                  <Maximize2 className="w-3 h-3" />
-                  <span>Click to Expand</span>
-                </div>
-              </div>
-
-              {/* Card 4: Diagnostic Perception (Click to preview video) */}
-              <div
-                onClick={() => {
-                  setIsPlayingVideo(true);
-                  playBlip(880);
-                }}
-                style={{ flex: '404 1 0%' }}
-                className="rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] h-[340px] sm:h-[400px] lg:h-[440px]"
-                title="Take a look"
-              >
-                <img
-                  src="/images/card4-clean-full.png"
-                  alt="Facial and diagnostic perception"
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                />
-              </div>
-
-            </div>
-          ) : (
-            /* Card 3 Cinema View when clicked */
-            <div className="w-full rounded-3xl overflow-hidden relative h-[380px] sm:h-[460px] lg:h-[520px] bg-[#ebdccc] shadow-2xl animate-fade-in flex items-center justify-center">
+        {/* 4-Card Hero Photos Section (Clean, permanent display without gallery expand modal) */}
+        <div className="py-8 sm:py-10 border-b border-slate-200/80">
+          <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-5 w-full">
+            
+            {/* Card 1: Clinical Practice (Lab Scientist with pristine frosted glass chart) */}
+            <div 
+              style={{ flex: '879 1 0%' }} 
+              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] h-[340px] sm:h-[400px] lg:h-[440px]"
+            >
               <img
-                src="/images/card3-expanded-clean.png"
-                alt="Artificial Intelligence Future Healtech"
-                className="w-full h-full object-cover object-center absolute inset-0"
+                src="/images/card1-clean-full.png"
+                alt="Clinical practice"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
               />
-
-              {/* Close / Shrink Button */}
-              <button
-                onClick={handleCard3Click}
-                className="absolute top-6 right-6 z-30 p-2.5 rounded-full bg-slate-950/70 hover:bg-slate-950 text-white backdrop-blur-md transition-all shadow-xl hover:scale-105 active:scale-95"
-                title="Collapse back to gallery"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Floating Return Pill */}
-              <div
-                onClick={handleCard3Click}
-                className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 bg-slate-950/80 hover:bg-slate-950 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-xs font-mono flex items-center gap-2 cursor-pointer shadow-xl transition-all hover:scale-105"
-              >
-                <span>Return to gallery</span>
-                <X className="w-3.5 h-3.5" />
-              </div>
             </div>
-          )}
 
+            {/* Card 2: Biomechanical Spine (Pristine holographic spine on chair) */}
+            <div 
+              style={{ flex: '473 1 0%' }} 
+              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] h-[340px] sm:h-[400px] lg:h-[440px]"
+            >
+              <img
+                src="/images/card2-clean-full.png"
+                alt="Biomechanical spine"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
+            </div>
+
+            {/* Card 3: Serene Meditation & Neural Recovery (Permanent Clean Photo) */}
+            <div
+              style={{ flex: '561 1 0%' }}
+              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ebdccc] h-[340px] sm:h-[400px] lg:h-[440px]"
+            >
+              <img
+                src="/images/card3-clean-full.png"
+                alt="Neural recovery and meditation"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
+            </div>
+
+            {/* Card 4: Diagnostic Perception (Permanent Clean Photo) */}
+            <div
+              style={{ flex: '404 1 0%' }}
+              className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] h-[340px] sm:h-[400px] lg:h-[440px]"
+            >
+              <img
+                src="/images/card4-clean-full.png"
+                alt="Facial and diagnostic perception"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
+            </div>
+
+          </div>
         </div>
 
         {/* Bottom Metrics Bar (Pristine layout matching video) */}
@@ -347,37 +295,6 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
         </div>
 
       </section>
-
-      {/* Video Modal if Card 4 is clicked */}
-      {isPlayingVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 max-w-2xl w-full shadow-2xl relative">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-              <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                Diagnostic Stream Telemetry
-              </span>
-              <button
-                onClick={() => setIsPlayingVideo(false)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg"
-              >
-                ✕ Close
-              </button>
-            </div>
-
-            <div className="w-full h-80 rounded-2xl overflow-hidden bg-black flex items-center justify-center">
-              <video
-                src="/videos/clean-heart-loop.mp4"
-                poster="/images/heart-clean.jpg"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      )}
 
     </div>
   );
