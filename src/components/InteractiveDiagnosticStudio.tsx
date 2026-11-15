@@ -34,6 +34,7 @@ interface LanguageOption {
 
 const SUPPORTED_LANGUAGES: LanguageOption[] = [
   { code: 'en-US', name: 'English (US)', flag: '🇺🇸', label: 'English' },
+  { code: 'si-LK', name: 'සිංහල (Sinhala)', flag: '🇱🇰', label: 'Sinhala' },
   { code: 'es-ES', name: 'Español', flag: '🇪🇸', label: 'Spanish' },
   { code: 'hi-IN', name: 'हिंदी (Hinglish)', flag: '🇮🇳', label: 'Hindi' },
   { code: 'ar-SA', name: 'العربية', flag: '🇸🇦', label: 'Arabic' }
@@ -315,6 +316,34 @@ Patient presents with 4-week history of dull axial lower back stiffness exacerba
 2. Ergonomic desk adjustment: Lumbar support seat alignment.
 3. PRN Ibuprofen 400mg with meals.
 4. Follow-up: 6 weeks if pain persists.`
+    },
+    'si-LK': {
+      icd: 'A90 (Dengue Fever / Acute Febrile Illness)',
+      text: `[AMBIENT AUDIO CAPTURE: සිංහල (si-LK)]
+"රෝගියා: ඩොක්ටර්, මට දවස් තුනක ඉඳන් තද උණක් තියෙනවා. ඇඟපත සහ විශේෂයෙන් දණහිස්, කොන්ද හොඳටම රිදෙනවා. ඇස් පිටුපසත් තද කැක්කුමක් තියෙනවා."
+"වෛද්‍යවරයා: රුධිර පරීක්ෂාවක් (FBC) කරලා ඩෙංගු තත්ත්වයක්ද කියලා බලමු. දියර වර්ග හොඳට බොන්න, පැරසිටමෝල් විතරක් ගන්න."
+
+[AUTO-TRANSLATED CLINICAL SOAP NOTE (Universal Medical English)]
+DATE: November 15, 2026 | TIME: 11:50 AM
+PATIENT: Adult Outpatient (38 y/o) | CLINICIAN: Dr. S. Reynolds, MD
+NOTE: Real-time translation from Sinhala source audio to FHIR/EHR compliant standard.
+
+[SUBJECTIVE]
+Patient reports 3-day history of acute, high-grade pyrexia associated with severe generalized myalgia, severe arthralgia ("breakbone" pattern), and retro-orbital cephalalgia. Denies overt hemorrhagic manifestations (epistaxis, hematemesis, melena), persistent abdominal pain, or refractory vomiting.
+
+[OBJECTIVE]
+- Blood Pressure: 114/76 mmHg | Heart Rate: 88 BPM | Oral Temp: 39.2°C (Optical rPPG Verified)
+- Physical Exam: Flushed facies, mild conjunctival suffusion. Tourniquet test borderline positive (<10 petechiae/sq.inch). Abdomen soft, non-tender, no hepatosplenomegaly.
+
+[ASSESSMENT]
+1. Classical Dengue Fever without warning signs (ICD-10: A90)
+2. Acute febrile viral syndrome, high probability endemic vector-borne transmission.
+
+[PLAN]
+1. Urgent Diagnostic: STAT Full Blood Count (FBC) with baseline hematocrit and platelet count; Dengue NS1 Antigen rapid test.
+2. Fluid Management: Aggressive oral rehydration therapy (ORS, king coconut water / ජීවනී) 2.5–3.0 L/day.
+3. Analgesia/Antipyretic: Paracetamol 500mg PO Q6H PRN (STRICT CONTRAINDICATION: Aspirin, Ibuprofen, and other NSAIDs due to platelet inhibition).
+4. Monitoring & Safety Netting: Daily outpatient platelet tracking; immediate emergency admission if warning signs emerge (severe persistent abdominal pain, mucosal bleeding, persistent vomiting, or clinical fluid accumulation).`
     },
     'es-ES': {
       icd: 'R07.9 (Acute Chest Pain, Unspecified)',
