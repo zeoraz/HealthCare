@@ -1,59 +1,30 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { AIHealthcareHero } from './components/AIHealthcareHero';
-import { MedicalDashboard } from './components/MedicalDashboard';
-import { FeaturesBento } from './components/FeaturesBento';
-import { HowItWorks } from './components/HowItWorks';
-import { AIBiomarkerDecoder } from './components/AIBiomarkerDecoder';
-import { AppDownloadSection } from './components/AppDownloadSection';
-import { Footer } from './components/Footer';
+import { CleanSections } from './components/CleanSections';
 import { BookingModal } from './components/BookingModal';
 
 export function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
-  const scrollToDashboard = () => {
-    const el = document.getElementById('dashboard');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[#fcfbfa] text-slate-900 flex flex-col relative selection:bg-orange-500/20 selection:text-orange-950">
+      <div className="min-h-screen bg-[#fcfbfa] text-slate-900 flex flex-col relative selection:bg-[#ea8d53]/20 selection:text-slate-950 font-sans">
         
-        {/* Main Landing Page Content */}
+        {/* Main Website Content */}
         <main className="flex-1">
-          {/* Flagship Hero Component (Exactly matching aihealthcare.com from your reference video) */}
+          {/* Hero Section with Sticky Navigation Bar & Pristine 4-Card Interactive Gallery */}
           <AIHealthcareHero 
             onOpenBooking={() => setIsBookingOpen(true)}
-            onExploreDashboard={scrollToDashboard}
           />
 
-          {/* Clinician Medical Dashboard Section (With real 3D video telemetry, radial gauges, and live ECG) */}
-          <div className="bg-slate-950 text-white rounded-t-[40px] mt-6 shadow-2xl">
-            <MedicalDashboard />
-
-            {/* AI Biomarker Decoder & Health Risk Simulator */}
-            <AIBiomarkerDecoder />
-
-            {/* Bento Features Grid & Clinical Pipeline */}
-            <FeaturesBento />
-            <HowItWorks />
-
-            {/* Mobile Companion App Download */}
-            <AppDownloadSection />
-
-            {/* Bottom CTA & Footer */}
-            <Footer 
-              onScrollToDashboard={scrollToDashboard}
-              onOpenBooking={() => setIsBookingOpen(true)}
-            />
-          </div>
+          {/* Clean, Matching Content Sections for Navigation Anchor Links & Minimal Footer */}
+          <CleanSections 
+            onOpenBooking={() => setIsBookingOpen(true)}
+          />
         </main>
 
-        {/* Interactive Booking & Consultation Modal */}
+        {/* Interactive Consultation & Demo Booking Modal */}
         <BookingModal 
           isOpen={isBookingOpen}
           onClose={() => setIsBookingOpen(false)}
