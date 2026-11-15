@@ -187,10 +187,13 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
         <div className="py-8 sm:py-10 border-b border-slate-200/80 relative">
           
           {!isCardExpanded ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-5 items-stretch">
+            <div className="flex flex-col sm:flex-row items-stretch gap-4 sm:gap-5 w-full">
               
-              {/* Card 1: Clinical Practice (Clean crop with pristine built-in widget, zero duplicate overlay) */}
-              <div className="lg:col-span-4 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] aspect-[877/899]">
+              {/* Card 1: Clinical Practice (Lab Scientist with pristine frosted glass chart) */}
+              <div 
+                style={{ flex: '879 1 0%' }} 
+                className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#f0ede8] h-[340px] sm:h-[400px] lg:h-[440px]"
+              >
                 <img
                   src="/images/card1-clean-full.png"
                   alt="Clinical practice"
@@ -198,8 +201,11 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
                 />
               </div>
 
-              {/* Card 2: Biomechanical Spine (Clean crop, no artificial overlay badge) */}
-              <div className="lg:col-span-3 rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] aspect-[473/899]">
+              {/* Card 2: Biomechanical Spine (Pristine holographic spine on chair) */}
+              <div 
+                style={{ flex: '473 1 0%' }} 
+                className="rounded-3xl overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow bg-[#ecebe9] h-[340px] sm:h-[400px] lg:h-[440px]"
+              >
                 <img
                   src="/images/card2-clean-full.png"
                   alt="Biomechanical spine"
@@ -210,7 +216,8 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
               {/* Card 3: Serene Meditation & Neural Recovery (Interactive: Click to Expand!) */}
               <div
                 onClick={handleCard3Click}
-                className="lg:col-span-3 rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-xl transition-all bg-[#ebdccc] aspect-[562/899] border-2 border-transparent hover:border-[#ea8d53]/50"
+                style={{ flex: '561 1 0%' }}
+                className="rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-xl transition-all bg-[#ebdccc] h-[340px] sm:h-[400px] lg:h-[440px] border-2 border-transparent hover:border-[#ea8d53]/50"
                 title="Click to expand"
               >
                 <img
@@ -232,7 +239,8 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
                   setIsPlayingVideo(true);
                   playBlip(880);
                 }}
-                className="lg:col-span-2 rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] aspect-[404/899]"
+                style={{ flex: '404 1 0%' }}
+                className="rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md transition-shadow bg-[#d9dcd6] h-[340px] sm:h-[400px] lg:h-[440px]"
                 title="Take a look"
               >
                 <img
@@ -245,7 +253,7 @@ export const AIHealthcareHero: React.FC<AIHealthcareHeroProps> = ({
             </div>
           ) : (
             /* Card 3 Cinema View when clicked */
-            <div className="w-full rounded-3xl overflow-hidden relative min-h-[440px] sm:min-h-[540px] lg:min-h-[600px] bg-[#ebdccc] shadow-2xl animate-fade-in flex items-center justify-center">
+            <div className="w-full rounded-3xl overflow-hidden relative h-[380px] sm:h-[460px] lg:h-[520px] bg-[#ebdccc] shadow-2xl animate-fade-in flex items-center justify-center">
               <img
                 src="/images/card3-expanded-clean.png"
                 alt="Artificial Intelligence Future Healtech"
