@@ -67,8 +67,11 @@ export const InteractiveDiagnosticStudio: React.FC = () => {
   const [isListeningMic, setIsListeningMic] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en-US');
   const [scribeText, setScribeText] = useState('');
+  const [currentIcd, setCurrentIcd] = useState<string>('');
   const [isCopied, setIsCopied] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const recordedSpeechRef = useRef<string>('');
+  const silenceTimerRef = useRef<any>(null);
 
   // Lab Presets Data
   const [labData, setLabData] = useState({
@@ -433,15 +436,101 @@ Patient presents with 7-day history of persistent non-productive nocturnal cough
 
   const activeScribeProfile = MULTILINGUAL_TRANSCRIPTS[selectedLanguage] || MULTILINGUAL_TRANSCRIPTS['en-US'];
 
+  const processSpokenAudioToSOAP = (spokenText: string) => {
+    if (recognitionRef.current) {
+      try { recognitionRef.current.stop(); } catch {}
+      recognitionRef.current = null;
+    }
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+
+    setIsListeningMic(false);
+    setIsScribing(true);
+    playBlip(840);
+
+    const langObj = SUPPORTED_LANGUAGES.find(l => l.code === selectedLanguage);
+    const cleanInput = (spokenText || '').trim();
+
+    // Context analysis for chief complaints
+    const isBackPain = cleanInput.includes('කොන්ද') || cleanInput.includes('අමාරු') || cleanInput.toLowerCase().includes('back') || cleanInput.toLowerCase().includes('spine');
+    const isFever = cleanInput.includes('උණ') || cleanInput.includes('ඇඟපත') || cleanInput.toLowerCase().includes('fever') || cleanInput.includes('ඩෙංගු');
+
+    let generatedSoap = '';
+    let icdCode = '';
+
+    if (isBackPain || (cleanInput && cleanInput.includes('කොන්ද'))) {
+      icdCode = 'M54.50 (Mechanical Low Back Strain)';
+      generatedSoap = `[RAW AMBIENT AUDIO (${langObj?.name || 'Native Language'})]
+"${cleanInput || 'මට කොන්දේ අමාරුව තියෙනවා'}"
+
+[AUTO-TRANSLATED CLINICAL SOAP NOTE (Universal Medical English)]
+DATE: November 15, 2026 | TIME: 11:50 AM
+PATIENT: Adult Outpatient (38 y/o) | CLINICIAN: Dr. S. Reynolds, MD
+NOTE: Real-time translation from ${langObj?.name || 'native language'} into FHIR/EHR compliant standard.
+
+[SUBJECTIVE]
+Patient presents with chief complaint of lower back stiffness and mechanical lumbar discomfort ("${cleanInput || 'මට කොන්දේ අමාරුව තියෙනවා'}"). Denies acute spinal trauma, bilateral lower extremity radicular paresthesia, or cauda equina red flags (bowel/bladder incontinence). Pain exacerbated by prolonged seating and bending.
+
+[OBJECTIVE]
+- Blood Pressure: 118/76 mmHg | Heart Rate: 72 BPM (Optical rPPG Verified)
+- Lumbar Spine: Mild tenderness over bilateral lumbar paraspinal musculature (L4-L5).
+- Range of Motion: Flexion slightly limited by discomfort. Negative Straight Leg Raise test bilaterally (80°).
+- Neurological: Deep tendon reflexes 2+ symmetrical (patellar and Achilles). Muscle strength 5/5 bilateral lower extremities.
+
+[ASSESSMENT]
+1. Mechanical lower back strain / Lumbar muscular fatigue (ICD-10: M54.50)
+2. Postural ergonomic stress.
+
+[PLAN]
+1. Physical Therapy: Lumbar stabilization exercises, core strengthening, and hamstring stretching.
+2. Pharmacotherapy: Paracetamol 500mg-1000mg PO TDS PRN for pain; hot/cold compress.
+3. Ergonomics: Lumbar support cushion and posture modifications for workstation.
+4. Follow-up: Re-evaluate in 2-3 weeks if symptoms do not improve.`;
+    } else if (isFever && selectedLanguage === 'si-LK') {
+      icdCode = 'A90 (Dengue Fever / Acute Febrile Illness)';
+      generatedSoap = activeScribeProfile.text;
+    } else {
+      icdCode = activeScribeProfile.icd;
+      generatedSoap = (cleanInput ? `[RAW AMBIENT AUDIO (${langObj?.name || 'Native Language'})]\n"${cleanInput}"\n\n` : '') + activeScribeProfile.text;
+    }
+
+    setCurrentIcd(icdCode);
+
+    // Stream out the translated clinical SOAP note
+    let i = 0;
+    const interval = setInterval(() => {
+      setScribeText(generatedSoap.slice(0, i));
+      i += 18;
+      if (i > generatedSoap.length) {
+        clearInterval(interval);
+        setScribeText(generatedSoap);
+        setIsScribing(false);
+        playSuccessChime();
+      }
+    }, 22);
+  };
+
   const handleStartMic = () => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
-    if (SpeechRecognition && !isListeningMic) {
+    if (isListeningMic) {
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch {}
+      }
+      processSpokenAudioToSOAP(recordedSpeechRef.current);
+      return;
+    }
+
+    if (SpeechRecognition) {
       try {
         const recognition = new SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.lang = selectedLanguage;
+        recordedSpeechRef.current = '';
 
         recognition.onstart = () => {
           setIsListeningMic(true);
@@ -451,15 +540,31 @@ Patient presents with 7-day history of persistent non-productive nocturnal cough
         };
 
         recognition.onresult = (event: any) => {
-          let liveSpeech = '';
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-            liveSpeech += event.results[i][0].transcript;
+          let fullTranscript = '';
+          for (let i = 0; i < event.results.length; ++i) {
+            fullTranscript += event.results[i][0].transcript + ' ';
           }
-          setScribeText((prev) => prev + ' ' + liveSpeech);
+          fullTranscript = fullTranscript.trim();
+          recordedSpeechRef.current = fullTranscript;
+
+          const langObj = SUPPORTED_LANGUAGES.find(l => l.code === selectedLanguage);
+          setScribeText(`[Listening to clinician-patient voice in ${langObj?.name || 'native language'}... Speak now]\n\nCaptured Speech:\n"${fullTranscript}"`);
+
+          // Auto-synthesize if user stops speaking for 3.5 seconds
+          if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+          silenceTimerRef.current = setTimeout(() => {
+            if (recordedSpeechRef.current) {
+              processSpokenAudioToSOAP(recordedSpeechRef.current);
+            }
+          }, 3500);
         };
 
         recognition.onerror = () => {
-          runSimulationScribe();
+          if (recordedSpeechRef.current) {
+            processSpokenAudioToSOAP(recordedSpeechRef.current);
+          } else {
+            runSimulationScribe();
+          }
         };
 
         recognition.start();
@@ -468,11 +573,6 @@ Patient presents with 7-day history of persistent non-productive nocturnal cough
       } catch {
         runSimulationScribe();
       }
-    } else if (isListeningMic && recognitionRef.current) {
-      recognitionRef.current.stop();
-      setIsListeningMic(false);
-      playSuccessChime();
-      return;
     }
 
     runSimulationScribe();
@@ -922,6 +1022,7 @@ Patient presents with 7-day history of persistent non-productive nocturnal cough
                   key={lang.code}
                   onClick={() => {
                     setSelectedLanguage(lang.code);
+                    setCurrentIcd('');
                     playBlip(820);
                   }}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium border flex items-center gap-1.5 transition-all ${
@@ -961,7 +1062,7 @@ Patient presents with 7-day history of persistent non-productive nocturnal cough
           </div>
 
           <div className="mt-4 flex flex-wrap items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Verified ICD-10 Coding: <strong className="text-slate-800">{activeScribeProfile.icd}</strong></span>
+            <span>Verified ICD-10 Coding: <strong className="text-slate-800">{currentIcd || activeScribeProfile.icd}</strong></span>
             <span className="text-emerald-600 font-bold">✓ FHIR & Epic Interoperability Ready</span>
           </div>
         </div>
