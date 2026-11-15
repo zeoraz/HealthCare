@@ -22,14 +22,23 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
         <div className="relative glass-panel rounded-3xl p-8 sm:p-14 border border-emerald-500/30 shadow-2xl overflow-hidden">
           
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-emerald-500/15 blur-3xl pointer-events-none" />
+          {/* Real Ambient Bio-Visual Backdrop */}
+          <div className="absolute inset-0 opacity-15 pointer-events-none">
+            <img 
+              src="/images/bento-ai-cell.jpg" 
+              alt="Neural medical network" 
+              className="w-full h-full object-cover mix-blend-screen filter hue-rotate-90 scale-125"
+            />
+          </div>
 
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-emerald-500/20 blur-3xl pointer-events-none" />
+
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight relative z-10">
             Your Health Data, Decoded by AI
           </h2>
 
-          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed relative z-10">
             Vitalis helps you track, understand, and act on your bloodwork — with smart AI insights, continuous telemetry, and clean clinical dashboards.
           </p>
 

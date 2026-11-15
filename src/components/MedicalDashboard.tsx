@@ -439,279 +439,367 @@ export const MedicalDashboard: React.FC = () => {
 
                   {/* Dynamic Content based on Active Tab */}
                   {activeTab === 'biomarkers' && (
-                    <>
-                      {/* 3 Radial Speedometer Dials (Matching Video Frame 7 & 10) */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                      
+                      {/* Left: Real Anatomical Holographic Body Video Monitor (Matching Video Frame 7 & 10) */}
+                      <div className="lg:col-span-4 bg-slate-900/70 rounded-2xl border border-emerald-500/30 p-4 flex flex-col items-center justify-between overflow-hidden relative shadow-xl">
+                        <div className="w-full flex items-center justify-between text-xs font-mono mb-2">
+                          <span className="text-emerald-400 font-bold flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                            Live Anatomical Twin
+                          </span>
+                          <span className="text-slate-400 text-[10px]">60 FPS Telemetry</span>
+                        </div>
+
+                        {/* Real High-Def Body Video */}
+                        <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center border border-white/5">
+                          <video
+                            src="/videos/clean-body-loop.mp4"
+                            poster="/images/body-clean.jpg"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-contain filter contrast-110"
+                          />
+                          <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-white/10 flex items-center justify-between text-[10px] font-mono">
+                            <span className="text-slate-400">Cardiovascular Core</span>
+                            <span className="text-emerald-400 font-bold">Synchronized</span>
+                          </div>
+                        </div>
+
+                        {/* Micro Vitals Bar below video */}
+                        <div className="w-full mt-3 grid grid-cols-2 gap-2 text-[11px] font-mono">
+                          <div className="bg-slate-950/60 p-2 rounded-xl border border-white/5">
+                            <div className="text-slate-400 text-[9px] uppercase">Thoracic Index</div>
+                            <div className="text-white font-bold">Optimal</div>
+                          </div>
+                          <div className="bg-slate-950/60 p-2 rounded-xl border border-white/5">
+                            <div className="text-slate-400 text-[9px] uppercase">Autonomic Tone</div>
+                            <div className="text-cyan-400 font-bold">Vagal Balance</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right: Dials & Biomarker Table */}
+                      <div className="lg:col-span-8 space-y-5">
                         
-                        {/* Dial 1: SHBG */}
-                        <div className="bg-slate-900/60 rounded-2xl p-4 border border-white/10 flex flex-col items-center justify-between">
-                          <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>SHBG</span>
-                            <span className="text-cyan-400">Low Risk</span>
-                          </div>
+                        {/* 3 Radial Speedometer Dials (Matching Video Frame 7 & 10) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           
-                          {/* Speedometer Arc SVG */}
-                          <div className="relative w-36 h-20 flex items-end justify-center">
-                            <svg className="w-36 h-20 overflow-visible" viewBox="0 0 120 70">
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 110 60"
-                                fill="none"
-                                stroke="rgba(255,255,255,0.1)"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 45 18"
-                                fill="none"
-                                stroke="#06b6d4"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <div className="absolute bottom-0 text-center">
-                              <div className="font-display font-extrabold text-2xl text-white">36</div>
-                              <div className="text-[10px] text-slate-400 font-mono">nmol/L</div>
+                          {/* Dial 1: SHBG */}
+                          <div className="bg-slate-900/60 rounded-2xl p-3.5 border border-white/10 flex flex-col items-center justify-between">
+                            <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+                              <span className="font-bold text-white">SHBG</span>
+                              <span className="text-cyan-400 text-[10px]">Optimal</span>
+                            </div>
+                            
+                            {/* Speedometer Arc SVG */}
+                            <div className="relative w-28 h-16 flex items-end justify-center">
+                              <svg className="w-28 h-16 overflow-visible" viewBox="0 0 120 70">
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 110 60"
+                                  fill="none"
+                                  stroke="rgba(255,255,255,0.1)"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 45 18"
+                                  fill="none"
+                                  stroke="#06b6d4"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              <div className="absolute bottom-0 text-center">
+                                <div className="font-display font-extrabold text-xl text-white">36</div>
+                                <div className="text-[9px] text-slate-400 font-mono">nmol/L</div>
+                              </div>
+                            </div>
+
+                            <div className="w-full flex justify-between text-[9px] font-mono text-slate-500 mt-1">
+                              <span>&lt; 25</span>
+                              <span>&gt; 100</span>
                             </div>
                           </div>
 
-                          <div className="w-full flex justify-between text-[10px] font-mono text-slate-500 mt-2">
-                            <span>&lt; 25</span>
-                            <span>&gt; 100</span>
-                          </div>
-                        </div>
+                          {/* Dial 2: Testosterone */}
+                          <div className="bg-slate-900/60 rounded-2xl p-3.5 border border-ruby-500/20 flex flex-col items-center justify-between relative overflow-hidden">
+                            <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+                              <span className="font-bold text-white">Testosterone</span>
+                              <span className="text-ruby-400 font-bold text-[10px] animate-pulse">High</span>
+                            </div>
 
-                        {/* Dial 2: Testosterone */}
-                        <div className="bg-slate-900/60 rounded-2xl p-4 border border-ruby-500/20 flex flex-col items-center justify-between relative overflow-hidden">
-                          <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>Testosterone</span>
-                            <span className="text-ruby-400 font-bold animate-pulse">High</span>
-                          </div>
+                            <div className="relative w-28 h-16 flex items-end justify-center">
+                              <svg className="w-28 h-16 overflow-visible" viewBox="0 0 120 70">
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 110 60"
+                                  fill="none"
+                                  stroke="rgba(255,255,255,0.1)"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 100 35"
+                                  fill="none"
+                                  stroke="#f43f5e"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              <div className="absolute bottom-0 text-center">
+                                <div className="font-display font-extrabold text-xl text-ruby-400">0.56</div>
+                                <div className="text-[9px] text-slate-400 font-mono">ng/mL</div>
+                              </div>
+                            </div>
 
-                          <div className="relative w-36 h-20 flex items-end justify-center">
-                            <svg className="w-36 h-20 overflow-visible" viewBox="0 0 120 70">
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 110 60"
-                                fill="none"
-                                stroke="rgba(255,255,255,0.1)"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 100 35"
-                                fill="none"
-                                stroke="#f43f5e"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <div className="absolute bottom-0 text-center">
-                              <div className="font-display font-extrabold text-2xl text-ruby-400">0.56</div>
-                              <div className="text-[10px] text-slate-400 font-mono">ng/mL</div>
+                            <div className="w-full flex justify-between text-[9px] font-mono text-slate-500 mt-1">
+                              <span>&lt; 0.15</span>
+                              <span className="text-ruby-400 font-bold">&gt; 0.45</span>
                             </div>
                           </div>
 
-                          <div className="w-full flex justify-between text-[10px] font-mono text-slate-500 mt-2">
-                            <span>&lt; 0.15</span>
-                            <span className="text-ruby-400 font-bold">&gt; 0.45</span>
-                          </div>
-                        </div>
+                          {/* Dial 3: DHEA-S */}
+                          <div className="bg-slate-900/60 rounded-2xl p-3.5 border border-white/10 flex flex-col items-center justify-between">
+                            <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+                              <span className="font-bold text-white">DHEA-S</span>
+                              <span className="text-emerald-400 text-[10px]">Normal</span>
+                            </div>
 
-                        {/* Dial 3: DHEA-S */}
-                        <div className="bg-slate-900/60 rounded-2xl p-4 border border-white/10 flex flex-col items-center justify-between">
-                          <div className="w-full flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>DHEA-S</span>
-                            <span className="text-emerald-400">Normal</span>
-                          </div>
+                            <div className="relative w-28 h-16 flex items-end justify-center">
+                              <svg className="w-28 h-16 overflow-visible" viewBox="0 0 120 70">
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 110 60"
+                                  fill="none"
+                                  stroke="rgba(255,255,255,0.1)"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                                <path
+                                  d="M 10 60 A 50 50 0 0 1 70 12"
+                                  fill="none"
+                                  stroke="#10b981"
+                                  strokeWidth="8"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                              <div className="absolute bottom-0 text-center">
+                                <div className="font-display font-extrabold text-xl text-white">130</div>
+                                <div className="text-[9px] text-slate-400 font-mono">ug/dL</div>
+                              </div>
+                            </div>
 
-                          <div className="relative w-36 h-20 flex items-end justify-center">
-                            <svg className="w-36 h-20 overflow-visible" viewBox="0 0 120 70">
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 110 60"
-                                fill="none"
-                                stroke="rgba(255,255,255,0.1)"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                              <path
-                                d="M 10 60 A 50 50 0 0 1 70 12"
-                                fill="none"
-                                stroke="#10b981"
-                                strokeWidth="8"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            <div className="absolute bottom-0 text-center">
-                              <div className="font-display font-extrabold text-2xl text-white">130</div>
-                              <div className="text-[10px] text-slate-400 font-mono">ug/dL</div>
+                            <div className="w-full flex justify-between text-[9px] font-mono text-slate-500 mt-1">
+                              <span>&lt; 25</span>
+                              <span>&gt; 100</span>
                             </div>
                           </div>
 
-                          <div className="w-full flex justify-between text-[10px] font-mono text-slate-500 mt-2">
-                            <span>&lt; 25</span>
-                            <span>&gt; 100</span>
-                          </div>
                         </div>
 
-                      </div>
-
-                      {/* Biomarker Data Table (Matching Video Frame 7 & 10) */}
-                      <div className="bg-slate-900/50 rounded-2xl border border-white/10 overflow-hidden">
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-left text-xs">
-                            <thead className="bg-slate-950/60 font-mono text-slate-400 text-[11px] uppercase tracking-wider border-b border-white/10">
-                              <tr>
-                                <th className="py-3 px-4">Indicator</th>
-                                <th className="py-3 px-4">Category</th>
-                                <th className="py-3 px-4">Low Bound</th>
-                                <th className="py-3 px-4">Result</th>
-                                <th className="py-3 px-4">High Bound</th>
-                                <th className="py-3 px-4">Status</th>
-                                <th className="py-3 px-4 text-right">Clinical AI</th>
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5">
-                              {filteredBiomarkers.map((row) => (
-                                <tr 
-                                  key={row.id} 
-                                  onClick={() => {
-                                    setSelectedBiomarker(row);
-                                    playBlip(800);
-                                  }}
-                                  className="hover:bg-emerald-500/5 cursor-pointer transition-colors"
-                                >
-                                  <td className="py-3 px-4 font-semibold text-white">
-                                    {row.indicator}
-                                  </td>
-                                  <td className="py-3 px-4 font-mono text-slate-400">
-                                    {row.category}
-                                  </td>
-                                  <td className="py-3 px-4 font-mono text-slate-500">
-                                    {row.low}
-                                  </td>
-                                  <td className="py-3 px-4 font-mono font-bold text-white">
-                                    {row.result}
-                                  </td>
-                                  <td className="py-3 px-4 font-mono text-slate-500">
-                                    {row.high}
-                                  </td>
-                                  <td className="py-3 px-4">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
-                                      row.status === 'Normal' 
-                                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                                        : row.status === 'High'
-                                        ? 'bg-ruby-500/15 text-ruby-400 border border-ruby-500/30'
-                                        : 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
-                                    }`}>
-                                      {row.status}
-                                    </span>
-                                  </td>
-                                  <td className="py-3 px-4 text-right">
-                                    <span className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1">
-                                      View note <ArrowUpRight className="w-3 h-3" />
-                                    </span>
-                                  </td>
+                        {/* Biomarker Data Table */}
+                        <div className="bg-slate-900/50 rounded-2xl border border-white/10 overflow-hidden">
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-left text-xs">
+                              <thead className="bg-slate-950/60 font-mono text-slate-400 text-[11px] uppercase tracking-wider border-b border-white/10">
+                                <tr>
+                                  <th className="py-2.5 px-3">Indicator</th>
+                                  <th className="py-2.5 px-3">Low</th>
+                                  <th className="py-2.5 px-3">Result</th>
+                                  <th className="py-2.5 px-3">High</th>
+                                  <th className="py-2.5 px-3">Status</th>
+                                  <th className="py-2.5 px-3 text-right">Action</th>
                                 </tr>
-                              ))}
-                            </tbody>
-                          </table>
+                              </thead>
+                              <tbody className="divide-y divide-white/5">
+                                {filteredBiomarkers.map((row) => (
+                                  <tr 
+                                    key={row.id} 
+                                    onClick={() => {
+                                      setSelectedBiomarker(row);
+                                      playBlip(800);
+                                    }}
+                                    className="hover:bg-emerald-500/5 cursor-pointer transition-colors"
+                                  >
+                                    <td className="py-2.5 px-3 font-semibold text-white">
+                                      {row.indicator}
+                                    </td>
+                                    <td className="py-2.5 px-3 font-mono text-slate-500">
+                                      {row.low}
+                                    </td>
+                                    <td className="py-2.5 px-3 font-mono font-bold text-white">
+                                      {row.result}
+                                    </td>
+                                    <td className="py-2.5 px-3 font-mono text-slate-500">
+                                      {row.high}
+                                    </td>
+                                    <td className="py-2.5 px-3">
+                                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                                        row.status === 'Normal' 
+                                          ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                                          : row.status === 'High'
+                                          ? 'bg-ruby-500/15 text-ruby-400 border border-ruby-500/30'
+                                          : 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
+                                      }`}>
+                                        {row.status}
+                                      </span>
+                                    </td>
+                                    <td className="py-2.5 px-3 text-right">
+                                      <span className="text-[10px] font-mono text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1">
+                                        View <ArrowUpRight className="w-3 h-3" />
+                                      </span>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
+
                       </div>
-                    </>
+
+                    </div>
                   )}
 
                   {/* Cardiovascular & ECG View (Matching Video Frame 11) */}
                   {activeTab === 'cardiac' && (
-                    <div className="space-y-5">
-                      {/* ECG Waveform Canvas */}
-                      <div className="bg-slate-900/70 rounded-2xl p-4 border border-emerald-500/30 relative overflow-hidden">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                            <span className="text-xs font-mono font-bold text-white">
-                              Continuous Lead II ECG Stream
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-4 text-xs font-mono">
-                            <span className="text-slate-400">Scale: 25mm/s</span>
-                            <span className="text-emerald-400 font-bold">Sinus Rhythm Confirmed</span>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                      
+                      {/* Left: Real 3D Anatomical Glass Heart Video Monitor (Matching Video Frame 11) */}
+                      <div className="lg:col-span-4 bg-slate-900/70 rounded-2xl border border-emerald-500/30 p-4 flex flex-col items-center justify-between overflow-hidden relative shadow-xl">
+                        <div className="w-full flex items-center justify-between text-xs font-mono mb-2">
+                          <span className="text-emerald-400 font-bold flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                            Live Myocardial Video
+                          </span>
+                          <span className="text-slate-400 text-[10px]">72 BPM Pulse</span>
+                        </div>
+
+                        {/* Real High-Def Heart Video */}
+                        <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center border border-white/5">
+                          <video
+                            src="/videos/clean-heart-loop.mp4"
+                            poster="/images/heart-clean.jpg"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-contain filter contrast-115 brightness-105"
+                          />
+                          <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-white/10 flex items-center justify-between text-[10px] font-mono">
+                            <span className="text-slate-400">Left Ventricle EF</span>
+                            <span className="text-cyan-400 font-bold">64% Optimal</span>
                           </div>
                         </div>
 
-                        <canvas 
-                          ref={ecgCanvasRef} 
-                          width={850} 
-                          height={140} 
-                          className="w-full h-36 rounded-xl bg-slate-950/80 border border-white/5"
-                        />
-                      </div>
-
-                      {/* Cardiac Telemetry History Table (Matching Video Frame 11) */}
-                      <div className="bg-slate-900/50 rounded-2xl border border-white/10 overflow-hidden">
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-left text-xs">
-                            <thead className="bg-slate-950/60 font-mono text-slate-400 text-[11px] uppercase tracking-wider border-b border-white/10">
-                              <tr>
-                                <th className="py-3 px-4">Date / Time</th>
-                                <th className="py-3 px-4">HR (bpm)</th>
-                                <th className="py-3 px-4">Blood Pressure (mmHg)</th>
-                                <th className="py-3 px-4">SpO2 (%)</th>
-                                <th className="py-3 px-4">HRV (ms)</th>
-                                <th className="py-3 px-4">Status</th>
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5 font-mono">
-                              <tr className="hover:bg-white/5">
-                                <td className="py-3 px-4 text-slate-300">2026-11-15 05:45</td>
-                                <td className="py-3 px-4 font-bold text-white">78</td>
-                                <td className="py-3 px-4 text-slate-300">120 / 80</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">98%</td>
-                                <td className="py-3 px-4 text-emerald-400">55 ms</td>
-                                <td className="py-3 px-4">
-                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                                    Optimal
-                                  </span>
-                                </td>
-                              </tr>
-                              <tr className="hover:bg-white/5">
-                                <td className="py-3 px-4 text-slate-300">2026-11-15 01:20</td>
-                                <td className="py-3 px-4 font-bold text-white">95</td>
-                                <td className="py-3 px-4 text-slate-300">135 / 85</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">95%</td>
-                                <td className="py-3 px-4 text-amber-400">40 ms</td>
-                                <td className="py-3 px-4">
-                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] bg-amber-500/15 text-amber-400 border border-amber-500/30">
-                                    Elevated
-                                  </span>
-                                </td>
-                              </tr>
-                              <tr className="hover:bg-white/5">
-                                <td className="py-3 px-4 text-slate-300">2026-11-14 18:30</td>
-                                <td className="py-3 px-4 font-bold text-ruby-400">110</td>
-                                <td className="py-3 px-4 text-ruby-400 font-bold">140 / 90</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">96%</td>
-                                <td className="py-3 px-4 text-ruby-400">30 ms</td>
-                                <td className="py-3 px-4">
-                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] bg-ruby-500/15 text-ruby-400 border border-ruby-500/30">
-                                    High Alert
-                                  </span>
-                                </td>
-                              </tr>
-                              <tr className="hover:bg-white/5">
-                                <td className="py-3 px-4 text-slate-300">2026-11-14 12:15</td>
-                                <td className="py-3 px-4 font-bold text-white">72</td>
-                                <td className="py-3 px-4 text-slate-300">118 / 78</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">99%</td>
-                                <td className="py-3 px-4 text-emerald-400">58 ms</td>
-                                <td className="py-3 px-4">
-                                  <span className="px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                                    Normal
-                                  </span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                        {/* Micro Cardiac Indices */}
+                        <div className="w-full mt-3 grid grid-cols-2 gap-2 text-[11px] font-mono">
+                          <div className="bg-slate-950/60 p-2 rounded-xl border border-white/5">
+                            <div className="text-slate-400 text-[9px] uppercase">Myocardial Wall</div>
+                            <div className="text-emerald-400 font-bold">11 mm (Nominal)</div>
+                          </div>
+                          <div className="bg-slate-950/60 p-2 rounded-xl border border-white/5">
+                            <div className="text-slate-400 text-[9px] uppercase">Aortic Velocity</div>
+                            <div className="text-white font-bold">1.2 m/s</div>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Right: ECG Waveform & Telemetry History */}
+                      <div className="lg:col-span-8 space-y-4">
+                        {/* ECG Waveform Canvas */}
+                        <div className="bg-slate-900/70 rounded-2xl p-4 border border-emerald-500/30 relative overflow-hidden">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                              <span className="text-xs font-mono font-bold text-white">
+                                Continuous Lead II ECG Stream
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-4 text-xs font-mono">
+                              <span className="text-slate-400">Scale: 25mm/s</span>
+                              <span className="text-emerald-400 font-bold">Sinus Rhythm Confirmed</span>
+                            </div>
+                          </div>
+
+                          <canvas 
+                            ref={ecgCanvasRef} 
+                            width={850} 
+                            height={130} 
+                            className="w-full h-32 rounded-xl bg-slate-950/80 border border-white/5"
+                          />
+                        </div>
+
+                        {/* Cardiac Telemetry History Table */}
+                        <div className="bg-slate-900/50 rounded-2xl border border-white/10 overflow-hidden">
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-left text-xs">
+                              <thead className="bg-slate-950/60 font-mono text-slate-400 text-[11px] uppercase tracking-wider border-b border-white/10">
+                                <tr>
+                                  <th className="py-2.5 px-3">Date / Time</th>
+                                  <th className="py-2.5 px-3">HR (bpm)</th>
+                                  <th className="py-2.5 px-3">BP (mmHg)</th>
+                                  <th className="py-2.5 px-3">SpO2</th>
+                                  <th className="py-2.5 px-3">HRV</th>
+                                  <th className="py-2.5 px-3">Status</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-white/5 font-mono text-xs">
+                                <tr className="hover:bg-white/5">
+                                  <td className="py-2.5 px-3 text-slate-300">2026-11-15 05:45</td>
+                                  <td className="py-2.5 px-3 font-bold text-white">78</td>
+                                  <td className="py-2.5 px-3 text-slate-300">120/80</td>
+                                  <td className="py-2.5 px-3 text-cyan-400 font-bold">98%</td>
+                                  <td className="py-2.5 px-3 text-emerald-400">55 ms</td>
+                                  <td className="py-2.5 px-3">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                      Optimal
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr className="hover:bg-white/5">
+                                  <td className="py-2.5 px-3 text-slate-300">2026-11-15 01:20</td>
+                                  <td className="py-2.5 px-3 font-bold text-white">95</td>
+                                  <td className="py-2.5 px-3 text-slate-300">135/85</td>
+                                  <td className="py-2.5 px-3 text-cyan-400 font-bold">95%</td>
+                                  <td className="py-2.5 px-3 text-amber-400">40 ms</td>
+                                  <td className="py-2.5 px-3">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                                      Elevated
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr className="hover:bg-white/5">
+                                  <td className="py-2.5 px-3 text-slate-300">2026-11-14 18:30</td>
+                                  <td className="py-2.5 px-3 font-bold text-ruby-400">110</td>
+                                  <td className="py-2.5 px-3 text-ruby-400 font-bold">140/90</td>
+                                  <td className="py-2.5 px-3 text-cyan-400 font-bold">96%</td>
+                                  <td className="py-2.5 px-3 text-ruby-400">30 ms</td>
+                                  <td className="py-2.5 px-3">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-ruby-500/15 text-ruby-400 border border-ruby-500/30">
+                                      High Alert
+                                    </span>
+                                  </td>
+                                </tr>
+                                <tr className="hover:bg-white/5">
+                                  <td className="py-2.5 px-3 text-slate-300">2026-11-14 12:15</td>
+                                  <td className="py-2.5 px-3 font-bold text-white">72</td>
+                                  <td className="py-2.5 px-3 text-slate-300">118/78</td>
+                                  <td className="py-2.5 px-3 text-cyan-400 font-bold">99%</td>
+                                  <td className="py-2.5 px-3 text-emerald-400">58 ms</td>
+                                  <td className="py-2.5 px-3">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                      Normal
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   )}
 

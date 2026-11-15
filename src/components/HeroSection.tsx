@@ -10,7 +10,7 @@ import {
   Zap,
   Play
 } from 'lucide-react';
-import { AnatomicalCanvas } from './AnatomicalCanvas';
+import { AnatomicalVisualizer } from './AnatomicalVisualizer';
 import { playBlip } from '../utils/audio';
 
 interface HeroSectionProps {
@@ -173,11 +173,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Right Column: Interactive 3D Anatomical Canvas */}
           <div className="lg:col-span-6 relative">
             <div className="relative">
-              {/* Interactive Three.js Canvas */}
-              <AnatomicalCanvas 
+              {/* Real 3D Anatomical Video Visualizer */}
+              <AnatomicalVisualizer 
                 modelType={modelType}
                 onModelChange={(newModel) => setModelType(newModel)}
-                accentColor="#10b981"
                 bpm={74}
               />
             </div>

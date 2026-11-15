@@ -120,14 +120,23 @@ export const AppDownloadSection: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Vitals Summary Card */}
-                    <div className="bg-gradient-to-tr from-emerald-950/60 to-slate-900 rounded-2xl p-4 border border-emerald-500/30">
-                      <div className="flex items-center justify-between text-xs mb-1">
-                        <span className="text-emerald-400 font-mono text-[10px] font-bold">RECOVERY SCORE</span>
-                        <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                    {/* Vitals Summary Card with Real Cardiac Imagery */}
+                    <div className="bg-gradient-to-tr from-emerald-950/80 to-slate-900 rounded-2xl p-3.5 border border-emerald-500/30 flex items-center gap-3">
+                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 flex-shrink-0 border border-emerald-500/30">
+                        <img 
+                          src="/images/heart-clean.jpg" 
+                          alt="Real 3D heart scan" 
+                          className="w-full h-full object-cover filter contrast-125"
+                        />
                       </div>
-                      <div className="font-display font-extrabold text-3xl text-white">92 / 100</div>
-                      <div className="text-[10px] text-slate-400 mt-1">HRV at 62ms (+8ms baseline)</div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between text-xs mb-0.5">
+                          <span className="text-emerald-400 font-mono text-[9px] font-bold">CARDIAC TELEMETRY</span>
+                          <Zap className="w-3 h-3 text-emerald-400" />
+                        </div>
+                        <div className="font-display font-extrabold text-xl text-white">92 / 100</div>
+                        <div className="text-[9px] text-slate-400">72 BPM • Sinus Rhythm</div>
+                      </div>
                     </div>
 
                     {/* Notification Pill in Phone */}

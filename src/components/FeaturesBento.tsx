@@ -110,33 +110,39 @@ export const FeaturesBento: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: AI-Powered Interpretation (No Doctor-Speak) */}
+          {/* Card 2: AI-Powered Interpretation (No Doctor-Speak) with Real Cellular Media */}
           <div className="group relative rounded-3xl p-7 bg-gradient-to-br from-emerald-950/40 via-slate-900/90 to-slate-950/90 border border-emerald-500/30 glass-card-hover flex flex-col justify-between overflow-hidden">
-            {/* Glowing Aura Accent */}
-            <div className="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl group-hover:bg-emerald-500/30 transition-all pointer-events-none" />
+            {/* Real Cellular Nebula Image Background */}
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-35 transition-opacity duration-500 pointer-events-none">
+              <img 
+                src="/images/bento-ai-cell.jpg" 
+                alt="Cellular AI interpretation" 
+                className="w-full h-full object-cover mix-blend-screen scale-110 group-hover:scale-125 transition-transform duration-700"
+              />
+            </div>
 
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-300 mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-300 mb-6 group-hover:scale-110 transition-transform relative z-10">
                 <Dna className="w-6 h-6 stroke-[2]" />
               </div>
 
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 relative z-10">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-teal-400 font-bold">
                   Natural Language AI
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug relative z-10">
                 AI-powered interpretation <span className="text-emerald-400">(no doctor-speak)</span>
               </h3>
 
-              <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+              <p className="mt-2 text-sm text-slate-400 leading-relaxed relative z-10">
                 Dense biomarker terminology translated instantly into straightforward, human-friendly insights and immediate action items.
               </p>
             </div>
 
             {/* Interactive Plain-Speak Toggle */}
-            <div className="mt-6 pt-5 border-t border-white/10">
+            <div className="mt-6 pt-5 border-t border-white/10 relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[11px] font-mono text-slate-400">View Mode:</span>
                 <button
@@ -150,7 +156,7 @@ export const FeaturesBento: React.FC = () => {
                 </button>
               </div>
 
-              <div className="bg-slate-950/70 rounded-xl p-3 border border-emerald-500/20 text-xs">
+              <div className="bg-slate-950/80 backdrop-blur-md rounded-xl p-3 border border-emerald-500/20 text-xs">
                 {showPlainSpeak ? (
                   <p className="text-emerald-300 leading-relaxed font-sans">
                     "Your liver enzymes are slightly fatigued due to strenuous resistance training; hydrate and retest in 14 days."
@@ -164,30 +170,39 @@ export const FeaturesBento: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 3: Track Iron, Liver, Hormones, B12 */}
+          {/* Card 3: Track Iron, Liver, Hormones, B12 with Real Organ Mesh Media */}
           <div className="group relative rounded-3xl p-7 bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-cyan-500/20 glass-card-hover flex flex-col justify-between overflow-hidden">
+            {/* Real Organ Mesh Image Background */}
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-35 transition-opacity duration-500 pointer-events-none">
+              <img 
+                src="/images/bento-organ-mesh.jpg" 
+                alt="Multi-organ biometric mesh" 
+                className="w-full h-full object-cover mix-blend-screen scale-110 group-hover:scale-125 transition-transform duration-700"
+              />
+            </div>
+
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mb-6 group-hover:scale-110 transition-transform relative z-10">
                 <Activity className="w-6 h-6 stroke-[2]" />
               </div>
 
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 relative z-10">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
                   80+ Biomarkers
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug relative z-10">
                 Track your Iron, Liver, Hormones, B12
               </h3>
 
-              <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+              <p className="mt-2 text-sm text-slate-400 leading-relaxed relative z-10">
                 Connect external lab tests or continuous wearable monitors to build a dynamic lifetime metabolic profile.
               </p>
             </div>
 
             {/* Organ Panel Selector */}
-            <div className="mt-6 pt-5 border-t border-white/10">
+            <div className="mt-6 pt-5 border-t border-white/10 relative z-10">
               <div className="flex flex-wrap gap-1.5 mb-2.5">
                 {organPanels.slice(0, 3).map((panel) => (
                   <button
@@ -207,39 +222,48 @@ export const FeaturesBento: React.FC = () => {
                 ))}
               </div>
 
-              <div className="bg-slate-950/60 rounded-xl p-2.5 border border-white/5 text-[11px] text-slate-300 font-mono">
+              <div className="bg-slate-950/80 backdrop-blur-md rounded-xl p-2.5 border border-white/5 text-[11px] text-slate-300 font-mono">
                 {organPanels.find(p => p.name === selectedOrgan)?.preview}
               </div>
             </div>
           </div>
 
-          {/* Card 4: Visual Dashboards, Alerts & Smart Reports */}
+          {/* Card 4: Visual Dashboards, Alerts & Smart Reports with Real Interface Media */}
           <div className="group relative rounded-3xl p-7 bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-white/10 glass-card-hover flex flex-col justify-between overflow-hidden">
+            {/* Real Dashboard Interface Background */}
+            <div className="absolute inset-0 opacity-15 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none">
+              <img 
+                src="/images/dashboard-preview.jpg" 
+                alt="Clinical reports and interface" 
+                className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-700"
+              />
+            </div>
+
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform relative z-10">
                 <FileText className="w-6 h-6 stroke-[2]" />
               </div>
 
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 relative z-10">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
                   Clinical Exports
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug">
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug relative z-10">
                 Visual dashboards, alerts & smart reports
               </h3>
 
-              <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+              <p className="mt-2 text-sm text-slate-400 leading-relaxed relative z-10">
                 One-click doctor-ready PDF summaries, encrypted physician portal sharing, and longitudinal trend visualizers.
               </p>
             </div>
 
             {/* Smart Report Feature Pill */}
-            <div className="mt-6 pt-5 border-t border-white/10">
-              <div className="bg-slate-950/60 rounded-2xl p-3 border border-white/5 flex items-center justify-between">
+            <div className="mt-6 pt-5 border-t border-white/10 relative z-10">
+              <div className="bg-slate-950/80 backdrop-blur-md rounded-2xl p-3 border border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold font-mono">
                     PDF
                   </div>
                   <div>
